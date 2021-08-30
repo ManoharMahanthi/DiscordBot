@@ -29,15 +29,19 @@ client.on("messageCreate", (msg) => {
     // export BEARER_TOKEN='YOUR-TOKEN'
     const token =
       "AAAAAAAAAAAAAAAAAAAAAFLCTAEAAAAAcESrpNUKUv4heFb%2FfVKXSER%2BMKU%3DmFo5qaYH0jpe0LYWFjbLLYGyWTRaFxzZB46K4Z7q54OvWl2OFp";
-
-    const endpointURL = "https://api.twitter.com/2/tweets?ids=";
-
+    QUERY = encodeURI(message);
+    // const endpointURL = "https://api.twitter.com/2/tweets?ids=";
+    // const endpointURL = `https://api.twitter.com/2/tweets/search/recent?query=${QUERY}`;
+    // const endpointURL =
+    // "https://api.twitter.com/2/tweets/search/recent?query=%2523caturday%2520has%253Aimages%2520-is%253Aretweet";
+    const endpointURL = "https://api.twitter.com/2/tweets/search/recent?query=";
     async function getRequest() {
       // These are the parameters for the API request
       // specify Tweet IDs to fetch, and any additional fields that are required
       // by default, only the Tweet ID and text are returned
       const params = {
-        ids: "1423830326665650179", // Edit Tweet IDs to look up
+        // ids: "1423830326665650179", // Edit Tweet IDs to look up
+        query: "musk",
         "tweet.fields": "lang,author_id", // Edit optional query parameters here
         "user.fields": "created_at", // Edit optional query parameters here
       };
@@ -62,7 +66,14 @@ client.on("messageCreate", (msg) => {
         // Make request
         const response = await getRequest();
         if (response) {
-          data = response.data[0].text;
+          console.log(response);
+          i = 0;
+          while (response.data[i].lang != "en") {
+            i++;
+          }
+          data = response.data[i].text;
+
+          // console.log(window.btoa(message));
           msg.reply(data);
           console.log(data);
         }
