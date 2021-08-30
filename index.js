@@ -21,6 +21,7 @@ client.on("ready", () => {
 client.on("messageCreate", (msg) => {
   message = msg.content.toLocaleLowerCase();
   if (message == "hi") msg.reply("Pora puka");
+  if (message == "kingu") msg.reply("Yaaayyy");
   console.log(message);
   if (message) {
     // The code below sets the bearer token from your environment variables
@@ -36,7 +37,7 @@ client.on("messageCreate", (msg) => {
       // specify Tweet IDs to fetch, and any additional fields that are required
       // by default, only the Tweet ID and text are returned
       const params = {
-        ids: "1278747501642657792,1255542774432063488", // Edit Tweet IDs to look up
+        ids: "1423830326665650179", // Edit Tweet IDs to look up
         "tweet.fields": "lang,author_id", // Edit optional query parameters here
         "user.fields": "created_at", // Edit optional query parameters here
       };
@@ -55,19 +56,24 @@ client.on("messageCreate", (msg) => {
         throw new Error("Unsuccessful request");
       }
     }
-
+    var data;
     (async () => {
       try {
         // Make request
         const response = await getRequest();
-        console.log(response.data[0].text);
-        msg.reply(response.data[0].text);
+        if (response) {
+          data = response.data[0].text;
+          msg.reply(data);
+          console.log(data);
+        }
       } catch (e) {
         console.log(e);
         process.exit(-1);
       }
-      process.exit();
+      // process.exit();
     })();
+
+    // msg.reply(data);
 
     // var axios = require("axios");
     // var API_key = "60334492ddbf059c9d3e63f3f8c788c3";
