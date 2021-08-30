@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 //manohar///
+//hai//////
 const Discord = require("discord.js");
 
 const dotenv = require("dotenv");
