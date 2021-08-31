@@ -19,6 +19,7 @@ client.on("ready", () => {
 });
 
 client.on("messageCreate", (msg) => {
+  if(msg.author.bot) return;
   message = msg.content.toLocaleLowerCase();
   if (message == "hi") msg.reply("Pora puka");
   if (message == "kingu") msg.reply("Yaaayyy");
