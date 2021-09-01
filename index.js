@@ -28,7 +28,7 @@ client.on("messageCreate", (msg) => {
 	   msg.reply("buthulu matladaku bro!");
 	   return;
   }
-  console.log(message);
+  console.log(message);	
   if (message) {
     // The code below sets the bearer token from your environment variables
     // To set environment variables on macOS or Linux, run the export command below from the terminal:
