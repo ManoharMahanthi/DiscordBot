@@ -23,6 +23,11 @@ client.on("messageCreate", (msg) => {
   message = msg.content.toLocaleLowerCase();
   if (message == "hi") msg.reply("Pora puka");
   if (message == "kingu") msg.reply("Yaaayyy");
+  if (message.includes("lanja"))
+  {
+	   msg.reply("buthulu matladaku bro!");
+	   return;
+  }
   console.log(message);
   if (message) {
     // The code below sets the bearer token from your environment variables
@@ -42,7 +47,7 @@ client.on("messageCreate", (msg) => {
       // by default, only the Tweet ID and text are returned
       const params = {
         // ids: "1423830326665650179", // Edit Tweet IDs to look up
-        query: "musk",
+        "query":message,
         "tweet.fields": "lang,author_id", // Edit optional query parameters here
         "user.fields": "created_at", // Edit optional query parameters here
       };
@@ -66,12 +71,12 @@ client.on("messageCreate", (msg) => {
       try {
         // Make request
         const response = await getRequest();
-        if (response) {
+        if (response.data!=undefined) {
           console.log(response);
           i = 0;
-          while (response.data[i].lang != "en") {
-            i++;
-          }
+        //   while (response.data[i].lang != "en") {
+        //     i++;
+        //   }
           data = response.data[i].text;
 
           // console.log(window.btoa(message));
@@ -80,7 +85,7 @@ client.on("messageCreate", (msg) => {
         }
       } catch (e) {
         console.log(e);
-        process.exit(-1);
+        // process.exit(-1);
       }
       // process.exit();
     })();
